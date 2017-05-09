@@ -9,6 +9,7 @@ import com.ifpb.agendanota10.entidade.Compromisso;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -17,12 +18,12 @@ import java.util.List;
  */
 public interface CompromissoDao {
 
-    public Compromisso readCompromissos(LocalDate data, String hora, String agenda) throws IOException, ClassNotFoundException, SQLException;
-    public List<Compromisso> listCompromissos(String agenda) throws IOException, ClassNotFoundException, SQLException;
-    public List<Compromisso> listCompromissos() throws IOException, ClassNotFoundException, SQLException;
-    public List<Compromisso> listCompromissos(LocalDate inicio, LocalDate fim, String agenda) throws ClassNotFoundException, IOException, SQLException;
-    public boolean createCompromissos(Compromisso comp) throws IOException, ClassNotFoundException, SQLException;
-    public boolean deleteCompromissos(Compromisso comp) throws IOException, ClassNotFoundException, SQLException;
-    public boolean updateCompromissos(Compromisso compNovo, Compromisso compAntigo) throws IOException, ClassNotFoundException, SQLException;
+    public Compromisso read(LocalDate data, LocalTime hora, String agenda) throws IOException, ClassNotFoundException, SQLException;
+    public List<Compromisso> list(String agenda) throws IOException, ClassNotFoundException, SQLException;
+    public List<Compromisso> list() throws IOException, ClassNotFoundException, SQLException;
+    public List<Compromisso> list(LocalDate inicio, LocalDate fim, String agenda) throws ClassNotFoundException, IOException, SQLException;
+    public boolean create(Compromisso comp) throws IOException, ClassNotFoundException, SQLException;
+    public boolean delete(Compromisso comp) throws IOException, ClassNotFoundException, SQLException;
+    public boolean update(Compromisso compNovo, Compromisso compAntigo) throws IOException, ClassNotFoundException, SQLException;
 
 }

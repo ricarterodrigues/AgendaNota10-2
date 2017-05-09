@@ -6,8 +6,10 @@
 package com.ifpb.agendanota10.visao;
 
 import com.ifpb.agendanota10.controle.AgendaDao;
+import com.ifpb.agendanota10.controle.AgendaDaoBanco;
 import com.ifpb.agendanota10.controle.AgendaDaoBinario;
 import com.ifpb.agendanota10.controle.CompromissoDao;
+import com.ifpb.agendanota10.controle.CompromissoDaoBanco;
 import com.ifpb.agendanota10.controle.CompromissoDaoBinario;
 import com.ifpb.agendanota10.entidade.Agenda;
 import com.ifpb.agendanota10.entidade.Compromisso;
@@ -15,6 +17,7 @@ import com.ifpb.agendanota10.entidade.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -64,12 +67,13 @@ public class TelaInicial extends javax.swing.JFrame {
         List<Compromisso> compromissosIntervalo;
         jTable1.removeAll();
         try {
-            compromissosIntervalo = daoComp.listCompromissos(LocalDate.now(),LocalDate.now().plusDays(30), (String) jComboBox2.getSelectedItem());
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            compromissosIntervalo = daoComp.list(LocalDate.now(),LocalDate.now().plusDays(30), (String) jComboBox2.getSelectedItem());
             String[] cabecalho = {"Data", "Hora", "Compromisso"};
             String[][] compromissos = new String[compromissosIntervalo.size()][3];
             for (int i = 0; i < compromissosIntervalo.size(); i++) {
                 Compromisso comp = compromissosIntervalo.get(i);
-                compromissos[i][0] = comp.getData().toString();
+                compromissos[i][0] = comp.getData().format(df);
                 compromissos[i][1] = comp.getHora().toString();
                 compromissos[i][2] = comp.getDescricao();
 
@@ -114,9 +118,19 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton6.setText("Editar Agenda");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton7.setText("Gerenciar Compromissos");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jLabel2.setText("Próximos compromissos");
@@ -126,6 +140,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jButton8.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton8.setText("Atualizar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,6 +211,20 @@ public class TelaInicial extends javax.swing.JFrame {
         TelaNovoCompromisso telaCompromisso = new TelaNovoCompromisso();
         telaCompromisso.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        TelaGerenciarAgenda telaGerenciaAgenda = new TelaGerenciarAgenda();
+        telaGerenciaAgenda.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        TelaGerenciarCompromisso telaGerenciaCompromisso = new TelaGerenciarCompromisso();
+        telaGerenciaCompromisso.setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        atualizarTabela();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments

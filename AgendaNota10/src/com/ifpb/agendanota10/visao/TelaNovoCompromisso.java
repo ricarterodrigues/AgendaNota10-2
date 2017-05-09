@@ -6,8 +6,10 @@
 package com.ifpb.agendanota10.visao;
 
 import com.ifpb.agendanota10.controle.AgendaDao;
+import com.ifpb.agendanota10.controle.AgendaDaoBanco;
 import com.ifpb.agendanota10.controle.AgendaDaoBinario;
 import com.ifpb.agendanota10.controle.CompromissoDao;
+import com.ifpb.agendanota10.controle.CompromissoDaoBanco;
 import com.ifpb.agendanota10.controle.CompromissoDaoBinario;
 import com.ifpb.agendanota10.entidade.Agenda;
 import com.ifpb.agendanota10.entidade.Compromisso;
@@ -66,7 +68,7 @@ public class TelaNovoCompromisso extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Compromisso");
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -170,7 +172,7 @@ public class TelaNovoCompromisso extends javax.swing.JFrame {
         try {
             comp.setData(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             comp.setAgenda(jComboBox1.getSelectedItem().toString());
-            if (daoComp.createCompromissos(comp)) {
+            if (daoComp.create(comp)) {
 
                 JOptionPane.showMessageDialog(this.getContentPane(),
                         "Compromisso criado com sucesso!",

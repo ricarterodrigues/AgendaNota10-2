@@ -6,6 +6,7 @@
 package com.ifpb.agendanota10.visao;
 
 import com.ifpb.agendanota10.controle.UsuarioDao;
+import com.ifpb.agendanota10.controle.UsuarioDaoBanco;
 import com.ifpb.agendanota10.controle.UsuarioDaoBinario;
 import com.ifpb.agendanota10.entidade.Usuario;
 import java.awt.Color;
@@ -80,8 +81,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 102, 0));
         jLabel4.setText("Agenda Nota 10");
-
-        jPasswordField1.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

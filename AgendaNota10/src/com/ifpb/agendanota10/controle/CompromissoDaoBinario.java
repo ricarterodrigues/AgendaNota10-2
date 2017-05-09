@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -43,8 +44,8 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public Compromisso readCompromissos(LocalDate data, String hora, String agenda) throws IOException, ClassNotFoundException, SQLException {
-        List<Compromisso> compromissos = listCompromissos(agenda);
+    public Compromisso read(LocalDate data, LocalTime hora, String agenda) throws IOException, ClassNotFoundException, SQLException {
+        List<Compromisso> compromissos = list(agenda);
 
         for (Compromisso c : compromissos) {
             if (c.getData().equals(data) && c.getHora().equals(hora) && c.getAgenda().equals(agenda) && c.getEmail().equals(userLogado.getEmail())) {
@@ -55,7 +56,7 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public List<Compromisso> listCompromissos(String agenda) throws IOException, ClassNotFoundException, SQLException {
+    public List<Compromisso> list(String agenda) throws IOException, ClassNotFoundException, SQLException {
         List<Compromisso> compromissos = new ArrayList<>();
         List<Compromisso> retorno = new ArrayList<>();
         if (this.compromissos.length() > 0) {
@@ -77,7 +78,7 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public List<Compromisso> listCompromissos() throws IOException, ClassNotFoundException, SQLException {
+    public List<Compromisso> list() throws IOException, ClassNotFoundException, SQLException {
         List<Compromisso> compromissos = new ArrayList<>();
         List<Compromisso> retorno = new ArrayList<>();
         if (this.compromissos.length() > 0) {
@@ -99,9 +100,9 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public List<Compromisso> listCompromissos(LocalDate inicio, LocalDate fim, String agenda) throws ClassNotFoundException, IOException, SQLException {
+    public List<Compromisso> list(LocalDate inicio, LocalDate fim, String agenda) throws ClassNotFoundException, IOException, SQLException {
         List<Compromisso> compromissosIntervalo = new ArrayList<>();
-        List<Compromisso> compromissos = listCompromissos();
+        List<Compromisso> compromissos = list();
 
         if (agenda == "Todas") {
             for (int i = 0; i < compromissos.size(); i++) {
@@ -121,8 +122,8 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public boolean createCompromissos(Compromisso comp) throws IOException, ClassNotFoundException, SQLException {
-        List<Compromisso> compromissos = listCompromissos();
+    public boolean create(Compromisso comp) throws IOException, ClassNotFoundException, SQLException {
+        List<Compromisso> compromissos = list();
 
         for (Compromisso c : compromissos) {
             if (c.getData().equals(comp.getData()) && c.getHora().equals(comp.getHora()) && c.getAgenda().equals(comp.getAgenda()) && c.getEmail().equals(userLogado.getEmail())) {
@@ -138,8 +139,8 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public boolean deleteCompromissos(Compromisso comp) throws IOException, ClassNotFoundException, SQLException {
-        List<Compromisso> compromissos = listCompromissos();
+    public boolean delete(Compromisso comp) throws IOException, ClassNotFoundException, SQLException {
+        List<Compromisso> compromissos = list();
 
         for (Compromisso c : compromissos) {
 
@@ -153,8 +154,8 @@ public class CompromissoDaoBinario implements CompromissoDao {
     }
 
     @Override
-    public boolean updateCompromissos(Compromisso compNovo, Compromisso compAntigo) throws IOException, ClassNotFoundException, SQLException {
-        List<Compromisso> compromissos = listCompromissos();
+    public boolean update(Compromisso compNovo, Compromisso compAntigo) throws IOException, ClassNotFoundException, SQLException {
+        List<Compromisso> compromissos = list();
 
         for (int i = 0; i < compromissos.size(); i++) {
             if (compromissos.get(i).getData().equals(compAntigo.getData()) && compromissos.get(i).getHora().equals(compAntigo.getHora()) && compromissos.get(i).getAgenda().equals(compAntigo.getAgenda()) && compromissos.get(i).getEmail().equals(userLogado.getEmail())) {

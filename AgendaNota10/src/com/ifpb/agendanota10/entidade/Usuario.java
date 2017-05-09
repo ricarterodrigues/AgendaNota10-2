@@ -1,6 +1,7 @@
 package com.ifpb.agendanota10.entidade;
 
 import com.ifpb.agendanota10.controle.Autenticavel;
+import com.ifpb.agendanota10.excecoes.InvalidDateException;
 import com.ifpb.agendanota10.excecoes.InvalidEmailException;
 import com.ifpb.agendanota10.excecoes.InvalidPasswordException;
 import java.io.Serializable;
@@ -40,6 +41,9 @@ public class Usuario implements Serializable, Autenticavel{
     }
 
     public void setNascimento(LocalDate nascimento) {
+        if(nascimento.isAfter(LocalDate.now())){
+            throw new InvalidDateException("Data de nascimento inválida!");
+        }
         this.nascimento = nascimento;
     }
 

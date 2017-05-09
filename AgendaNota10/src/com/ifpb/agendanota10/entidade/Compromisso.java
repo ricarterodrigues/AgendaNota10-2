@@ -5,6 +5,7 @@
  */
 package com.ifpb.agendanota10.entidade;
 
+import com.ifpb.agendanota10.excecoes.InvalidDateException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,8 +40,13 @@ public class Compromisso implements Serializable{
         return data;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setData(LocalDate data) throws InvalidDateException {
+        if(LocalDate.now().isBefore(data)){
+            this.data = data;
+        }
+        else{
+           throw new InvalidDateException("Data inválida!");
+        }
     }
 
     public LocalTime getHora() {

@@ -20,6 +20,6 @@ public interface AgendaDao {
     public List<Agenda> list(String email) throws ClassNotFoundException, SQLException, IOException;
     public boolean create(Agenda agenda) throws ClassNotFoundException, SQLException, IOException;
     public boolean delete(String nome) throws ClassNotFoundException, SQLException, IOException;
-    public boolean update(Agenda agendaNova, Agenda agendaAntiga) throws ClassNotFoundException, SQLException, IOException;
+    public boolean update(Agenda newAgenda, Agenda oldAgenda) throws ClassNotFoundException, SQLException, IOException;
     
 }

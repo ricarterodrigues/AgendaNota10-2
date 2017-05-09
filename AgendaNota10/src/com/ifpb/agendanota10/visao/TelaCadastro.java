@@ -6,6 +6,7 @@
 package com.ifpb.agendanota10.visao;
 
 import com.ifpb.agendanota10.controle.UsuarioDao;
+import com.ifpb.agendanota10.controle.UsuarioDaoBanco;
 import com.ifpb.agendanota10.controle.UsuarioDaoBinario;
 import com.ifpb.agendanota10.entidade.Usuario;
 import com.ifpb.agendanota10.excecoes.InvalidDateException;

@@ -16,6 +16,10 @@ public class Agenda implements Serializable{
     
     private String nome;
     private String email;
+    
+    public Agenda(){
+        
+    }
 
     public Agenda(String nome, String email) {
         this.nome = nome;
