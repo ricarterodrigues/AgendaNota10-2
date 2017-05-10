@@ -5,6 +5,7 @@
  */
 package com.ifpb.agendanota10.visao;
 
+import com.ifpb.agendanota10.controle.EnviarEmail;
 import com.ifpb.agendanota10.controle.UsuarioDao;
 import com.ifpb.agendanota10.controle.UsuarioDaoBanco;
 import com.ifpb.agendanota10.controle.UsuarioDaoBinario;
@@ -12,6 +13,7 @@ import com.ifpb.agendanota10.entidade.Usuario;
 import com.ifpb.agendanota10.excecoes.InvalidDateException;
 import com.ifpb.agendanota10.excecoes.InvalidEmailException;
 import com.ifpb.agendanota10.excecoes.InvalidPasswordException;
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,8 +21,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.apache.commons.mail.EmailException;
 
 /**
  *
@@ -31,7 +36,8 @@ public class TelaCadastro extends javax.swing.JFrame {
     private UsuarioDao dao;
     
     public TelaCadastro() {
-        dao = new UsuarioDaoBinario();
+        dao = new UsuarioDaoBanco();
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
         setIconImage(imagemTituloJanela.getImage());
@@ -185,7 +191,8 @@ public class TelaCadastro extends javax.swing.JFrame {
             try {
                 usuario.setNascimento(nascimento);
                 if (dao.create(usuario)) {
-
+                    /*EnviarEmail enviarEmail = new EnviarEmail();
+                    enviarEmail.sendEmail();*/
                     JOptionPane.showMessageDialog(this.getContentPane(),
                             "Cadastrado com sucesso");
                     this.dispose();
@@ -200,7 +207,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                         ex.getMessage(),
                         "Mensagem de erro",
                         JOptionPane.ERROR_MESSAGE);
-            }
+            }/* catch (EmailException ex) {
+                Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
 
         } catch (DateTimeParseException ex) {
             JOptionPane.showMessageDialog(this.getContentPane(),

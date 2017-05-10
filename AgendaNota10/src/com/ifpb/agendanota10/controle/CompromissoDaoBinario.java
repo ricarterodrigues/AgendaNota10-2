@@ -80,7 +80,7 @@ public class CompromissoDaoBinario implements CompromissoDao {
     @Override
     public List<Compromisso> list() throws IOException, ClassNotFoundException, SQLException {
         List<Compromisso> compromissos = new ArrayList<>();
-        List<Compromisso> retorno = new ArrayList<>();
+        List<Compromisso> retorno;
         if (this.compromissos.length() > 0) {
             ObjectInputStream input;
             input = new ObjectInputStream(
@@ -89,14 +89,17 @@ public class CompromissoDaoBinario implements CompromissoDao {
 
             if (retorno != null) {
                 for (Compromisso c : retorno) {
-                    if (c.getEmail().equals(userLogado.getEmail()));
-                    compromissos.add(c);
+                    if (c.getEmail().equals(userLogado.getEmail())){
+                        compromissos.add(c);
+                    }
                 }
+                return compromissos;
             }
-            return compromissos;
+            
         } else {
             return new ArrayList<>();
         }
+        return null;
     }
 
     @Override
@@ -106,14 +109,14 @@ public class CompromissoDaoBinario implements CompromissoDao {
 
         if (agenda == "Todas") {
             for (int i = 0; i < compromissos.size(); i++) {
-                if (compromissos.get(i).getData().isAfter(inicio) && compromissos.get(i).getData().isBefore(fim)) {
+                if (compromissos.get(i).getEmail().equals(userLogado.getEmail())&&((compromissos.get(i).getData().isAfter(inicio)||compromissos.get(i).getData().equals(inicio))&&(compromissos.get(i).getData().isBefore(fim)||compromissos.get(i).getData().equals(fim)))) {
                     compromissosIntervalo.add(compromissos.get(i));
                 }
             }
             return compromissosIntervalo;
         } else {
             for (int i = 0; i < compromissos.size(); i++) {
-                if (compromissos.get(i).getData().isAfter(inicio) && compromissos.get(i).getData().isBefore(fim) && compromissos.get(i).getAgenda().equals(agenda)) {
+                if ((compromissos.get(i).getData().isAfter(inicio) || compromissos.get(i).getData().equals(inicio)) && (compromissos.get(i).getData().isBefore(fim) || compromissos.get(i).getData().equals(fim))&& compromissos.get(i).getAgenda().equals(agenda)) {
                     compromissosIntervalo.add(compromissos.get(i));
                 }
             }

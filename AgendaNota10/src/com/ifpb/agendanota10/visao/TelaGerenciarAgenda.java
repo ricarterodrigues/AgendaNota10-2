@@ -10,6 +10,7 @@ import com.ifpb.agendanota10.controle.AgendaDaoBanco;
 import com.ifpb.agendanota10.controle.AgendaDaoBinario;
 import com.ifpb.agendanota10.entidade.Agenda;
 import static com.ifpb.agendanota10.visao.TelaInicial.userLogado;
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,16 +25,17 @@ import javax.swing.table.DefaultTableModel;
 public class TelaGerenciarAgenda extends javax.swing.JFrame {
 
     private static AgendaDao dao;
-    
+
     public TelaGerenciarAgenda() {
-        dao = new AgendaDaoBinario();
+        dao = new AgendaDaoBanco();
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
-        ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ThigoYure\\Documents\\Projeto-POO\\Projeto-POO\\MyPersonalAgenda\\src\\com\\ifpb\\MyPersonalAgenda\\images\\Icone.png");
+        ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
         setIconImage(imagemTituloJanela.getImage());
         atualizarTabela();
     }
-    
-    public static void atualizarTabela(){
+
+    public static void atualizarTabela() {
         List<Agenda> agendas;
         jTable1.removeAll();
         try {
@@ -45,7 +47,6 @@ public class TelaGerenciarAgenda extends javax.swing.JFrame {
                 matrizAgendas[i][0] = agenda.getNome();
 
             }
-            System.out.println(matrizAgendas);
             jTable1.removeAll();
             DefaultTableModel modelo = new DefaultTableModel(matrizAgendas, cabecalho);
             jTable1.setModel(modelo);
@@ -71,9 +72,13 @@ public class TelaGerenciarAgenda extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(400, 200));
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("Gerenciar Agenda");
 
+        jTable1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -87,6 +92,7 @@ public class TelaGerenciarAgenda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton1.setText("Criar Agenda");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +100,7 @@ public class TelaGerenciarAgenda extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton2.setText("Editar Agenda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,31 +115,33 @@ public class TelaGerenciarAgenda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel1)))
-                .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(76, 76, 76))
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(60, 60, 60)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -145,11 +154,17 @@ public class TelaGerenciarAgenda extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Agenda agenda = new Agenda();
-        int k = jTable1.getSelectedRow();
-        String nome = (String) jTable1.getValueAt(k, 0);
-        agenda.setNome(nome);
-        TelaEditarAgenda gerenciaAgendas = new TelaEditarAgenda(agenda);
-        gerenciaAgendas.setVisible(true);
+        try {
+            int k = jTable1.getSelectedRow();
+            String nome = (String) jTable1.getValueAt(k, 0);
+            agenda.setNome(nome);
+            TelaEditarAgenda gerenciaAgendas = new TelaEditarAgenda(agenda);
+            gerenciaAgendas.setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Item!");
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

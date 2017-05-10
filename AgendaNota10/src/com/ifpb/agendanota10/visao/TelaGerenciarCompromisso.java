@@ -9,6 +9,7 @@ import com.ifpb.agendanota10.controle.CompromissoDao;
 import com.ifpb.agendanota10.controle.CompromissoDaoBanco;
 import com.ifpb.agendanota10.controle.CompromissoDaoBinario;
 import com.ifpb.agendanota10.entidade.Compromisso;
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -31,7 +32,8 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
     private static CompromissoDao dao;
 
     public TelaGerenciarCompromisso() {
-        dao = new CompromissoDaoBinario();
+        dao = new CompromissoDaoBanco();
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
         setIconImage(imagemTituloJanela.getImage());
@@ -45,18 +47,17 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
             DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             compromissos = dao.list(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), "Todas");
             String[] cabecalho = {"Data", "Hora", "Compromisso", "Agenda"};
-            String[][] compromissosMat = new String[compromissos.size()][4];
+            String[][] matrizCompromisso = new String[compromissos.size()][4];
             for (int i = 0; i < compromissos.size(); i++) {
                 Compromisso comp = compromissos.get(i);
-                compromissosMat[i][0] = comp.getData().format(df);
-                compromissosMat[i][1] = comp.getHora().getHour() + ":" + comp.getHora().getMinute();
-                compromissosMat[i][2] = comp.getDescricao();
-                compromissosMat[i][3] = comp.getAgenda();
+                matrizCompromisso[i][0] = comp.getData().format(df);
+                matrizCompromisso[i][1] = comp.getHora().getHour() + ":" + comp.getHora().getMinute();
+                matrizCompromisso[i][2] = comp.getDescricao();
+                matrizCompromisso[i][3] = comp.getAgenda();
 
             }
-            System.out.println(compromissosMat);
             jTable1.removeAll();
-            DefaultTableModel modelo = new DefaultTableModel(compromissosMat, cabecalho);
+            DefaultTableModel modelo = new DefaultTableModel(matrizCompromisso, cabecalho);
             jTable1.setModel(modelo);
 
         } catch (ClassNotFoundException | IOException | SQLException ex) {
@@ -71,18 +72,17 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
             DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             compromissos = dao.list();
             String[] cabecalho = {"Data", "Hora", "Compromisso", "Agenda"};
-            String[][] compromissosMat = new String[compromissos.size()][4];
+            String[][] matrizCompromisso = new String[compromissos.size()][4];
             for (int i = 0; i < compromissos.size(); i++) {
                 Compromisso comp = compromissos.get(i);
-                compromissosMat[i][0] = comp.getData().format(df);
-                compromissosMat[i][1] = comp.getHora().getHour() + ":" + comp.getHora().getMinute();
-                compromissosMat[i][2] = comp.getDescricao();
-                compromissosMat[i][3] = comp.getAgenda();
+                matrizCompromisso[i][0] = comp.getData().format(df);
+                matrizCompromisso[i][1] = comp.getHora().getHour() + ":" + comp.getHora().getMinute();
+                matrizCompromisso[i][2] = comp.getDescricao();
+                matrizCompromisso[i][3] = comp.getAgenda();
 
             }
-            System.out.println(compromissosMat);
             jTable1.removeAll();
-            DefaultTableModel modelo = new DefaultTableModel(compromissosMat, cabecalho);
+            DefaultTableModel modelo = new DefaultTableModel(matrizCompromisso, cabecalho);
             jTable1.setModel(modelo);
 
         } catch (ClassNotFoundException | IOException | SQLException ex) {
@@ -110,13 +110,19 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(400, 200));
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("Gerenciar Compromisso");
 
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel2.setText("de");
 
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel3.setText("para");
 
+        jButton1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton1.setText("Atualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +130,7 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -137,6 +144,7 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton2.setText("Editar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,33 +156,27 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(170, 170, 170)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 5, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
                                 .addComponent(jButton1)
-                                .addGap(71, 71, 71)
-                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -190,13 +192,13 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jLabel3))
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,16 +206,18 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        int k = jTable1.getSelectedRow();
-        String data = (String) jTable1.getValueAt(k, 0);
-        String hora = (String) jTable1.getValueAt(k, 1);
-        String descricao = (String) jTable1.getValueAt(k, 2);
-        String agenda = (String) jTable1.getValueAt(k, 3);
-        TelaEditarCompromisso gerenciaCompromissos;
         try {
+            int k = jTable1.getSelectedRow();
+
+            String data = (String) jTable1.getValueAt(k, 0);
+            String hora = (String) jTable1.getValueAt(k, 1);
+            String descricao = (String) jTable1.getValueAt(k, 2);
+            String agenda = (String) jTable1.getValueAt(k, 3);
+            TelaEditarCompromisso gerenciaCompromissos;
             Compromisso comp;
             DateTimeFormatter dft = DateTimeFormatter.ofPattern("H:m");
-            comp = dao.read(LocalDate.parse(data), LocalTime.parse(hora, dft), agenda);
+            DateTimeFormatter dft2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            comp = dao.read(LocalDate.parse(data, dft2), LocalTime.parse(hora, dft), agenda);
             gerenciaCompromissos = new TelaEditarCompromisso(comp);
             gerenciaCompromissos.setVisible(true);
         } catch (IOException ex) {
@@ -222,6 +226,8 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
             Logger.getLogger(TelaGerenciarCompromisso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaGerenciarCompromisso.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Item!");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -233,6 +239,8 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
             Logger.getLogger(TelaGerenciarCompromisso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaGerenciarCompromisso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(rootPane, "Adcione Intervalo!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

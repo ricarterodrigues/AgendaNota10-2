@@ -14,6 +14,7 @@ import com.ifpb.agendanota10.controle.CompromissoDaoBinario;
 import com.ifpb.agendanota10.entidade.Agenda;
 import com.ifpb.agendanota10.entidade.Compromisso;
 import com.ifpb.agendanota10.entidade.Usuario;
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -38,8 +39,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }
     
     public TelaInicial(Usuario usuario){
-        daoAg = new AgendaDaoBinario();
-        daoComp = new CompromissoDaoBinario();
+        daoAg = new AgendaDaoBanco();
+        daoComp = new CompromissoDaoBanco();
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
         this.userLogado = usuario;
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -78,7 +80,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 compromissos[i][2] = comp.getDescricao();
 
             }
-            System.out.println(compromissosIntervalo);
             jTable1.removeAll();
             DefaultTableModel modelo = new DefaultTableModel(compromissos, cabecalho);
             jTable1.setModel(modelo);
@@ -107,6 +108,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(400, 200));
 
         jButton5.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton5.setText("Novo Compromisso");
@@ -146,6 +148,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
