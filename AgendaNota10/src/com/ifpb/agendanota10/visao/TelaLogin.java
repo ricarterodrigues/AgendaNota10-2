@@ -23,7 +23,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private UsuarioDao dao;
     public TelaLogin() {
-        dao = new UsuarioDaoBanco();
+        dao = new UsuarioDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -49,7 +49,9 @@ public class TelaLogin extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
         setSize(new java.awt.Dimension(600, 600));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N

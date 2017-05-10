@@ -28,7 +28,7 @@ public class TelaEditarAgenda extends javax.swing.JFrame {
     private static Agenda oldAgenda = new Agenda();
     
     public TelaEditarAgenda(Agenda agenda) {
-        dao = new AgendaDaoBanco();
+        dao = new AgendaDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon iconeJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -54,14 +54,16 @@ public class TelaEditarAgenda extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Agenda");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel1.setText("Nome");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel2.setText("Nova Agenda");
+        jLabel2.setText("Editar Agenda");
 
         jButton1.setText("Atualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,17 +84,19 @@ public class TelaEditarAgenda extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jButton1))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))))
+                            .addComponent(jButton2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel2)))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

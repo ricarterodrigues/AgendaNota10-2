@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Essa classe contém dados referentes aos usuários
+ * @author Ricarte
+ */
 public class Usuario implements Serializable, Autenticavel{
 
     private String nome;
@@ -16,10 +20,21 @@ public class Usuario implements Serializable, Autenticavel{
     private String email;
     private String senha;
     
+    /**
+     * Construtor vazio do usuário
+     */
     public Usuario(){
         
     }
     
+    /**
+     * Construtor do usuário
+     * @param nome O nome do usuário
+     * @param nascimento A data de nascimento do usuário
+     * @param sexo O sexo do usuário
+     * @param email O email do usuário para fazer login
+     * @param senha A senha do login
+     */
     public Usuario(String nome, LocalDate nascimento, char sexo, String email, String senha){
         this.nome = nome;
         this.nascimento = nascimento;
@@ -123,6 +138,12 @@ public class Usuario implements Serializable, Autenticavel{
         return true;
     }
 
+    /**
+     * Método para autenticar usuário
+     * @param email Email do login do usuário
+     * @param senha Senha do login do usuário
+     * @return 
+     */
     @Override
     public boolean autenticar(String email, String senha) {
         return this.email.equals(email) && this.senha.equals(senha);

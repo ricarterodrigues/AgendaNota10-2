@@ -36,7 +36,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private UsuarioDao dao;
     
     public TelaCadastro() {
-        dao = new UsuarioDaoBanco();
+        dao = new UsuarioDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -66,7 +66,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Usuário");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 0));

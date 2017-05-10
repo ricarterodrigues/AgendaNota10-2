@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ifpb.agendanota10.controle;
 
 import com.ifpb.agendanota10.banco.BancoConexao;
@@ -17,11 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author ricar
+ * Essa classe contém métodos referentes a construção da agenda no banco de dados
+ * @author Ricarte
  */
 public class AgendaDaoBanco implements AgendaDao{
 
+    /**
+     * Le uma agenda
+     * @param nome O nome da agenda
+     * @return Os dados da agenda
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public Agenda read(String nome) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -45,6 +48,14 @@ public class AgendaDaoBanco implements AgendaDao{
         }
     }
 
+    /**
+     * Lista agendas
+     * @param email O email do usuario 
+     * @return As agendas do usuario
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public List<Agenda> list(String email) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -70,6 +81,14 @@ public class AgendaDaoBanco implements AgendaDao{
         return agendas;
     }
 
+    /**
+     * Cria uma agenda
+     * @param agenda Os dados da agenda que será criada
+     * @return A confirmacao da criacao da agenda
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean create(Agenda agenda) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -84,6 +103,14 @@ public class AgendaDaoBanco implements AgendaDao{
         return retorno;
     }
 
+    /**
+     * Deleta uma agenda
+     * @param nome O nome da agenda que sera deletada
+     * @return A confirmacao de que a agenda foi deletada
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean delete(String nome) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -98,6 +125,15 @@ public class AgendaDaoBanco implements AgendaDao{
         return retorno;
     }
 
+    /**
+     * Atualiza uma agenda
+     * @param newAgenda Os novos dados da agenda 
+     * @param oldAgenda Os antigos dados da agenda
+     * @return A confirmacao da atualizacao da agenda
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean update(Agenda newAgenda, Agenda oldAgenda) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ifpb.agendanota10.controle;
 
 import com.ifpb.agendanota10.banco.BancoConexao;
@@ -25,18 +20,31 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author ricar
+ * Essa classe contém métodos referentes a construção do compromisso no banco de dados
+ * @author Ricarte
  */
 public class CompromissoDaoBanco implements CompromissoDao {
 
     AgendaDaoBanco agendaDao;
     List<Agenda> agendas ;
 
+    /**
+     * Construtor do CompromissoDaoBanco
+     */
     public CompromissoDaoBanco(){
         agendaDao = new AgendaDaoBanco();
     }
 
+    /**
+     * Lê um compromisso
+     * @param data A data do compromisso que será lido
+     * @param hora A hora do compromisso que será lido
+     * @param agenda A agenda do compromisso que será lido
+     * @return Os dados do compromisso
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public Compromisso read(LocalDate data, LocalTime hora, String agenda) throws IOException, ClassNotFoundException, SQLException {
         Connection con = BancoConexao.getConnection();
@@ -65,10 +73,23 @@ public class CompromissoDaoBanco implements CompromissoDao {
         }
     }
 
+    /**
+     * 
+     * @param time
+     * @return 
+     */
     public static LocalTime toLocalTime(java.sql.Time time) {
         return time.toLocalTime();
     }
-
+    
+    /**
+     * Lista compromissos
+     * @param agenda A agenda que será listada os compromissos
+     * @return Os compromissos da agenda 
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public List<Compromisso> list(String agenda) throws IOException, ClassNotFoundException, SQLException {
         Connection con = BancoConexao.getConnection();
@@ -96,6 +117,13 @@ public class CompromissoDaoBanco implements CompromissoDao {
         return compromissos;
     }
 
+    /**
+     * Lista compromissos
+     * @return Os compromisso do usuário
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public List<Compromisso> list() throws IOException, ClassNotFoundException, SQLException {
         Connection con = BancoConexao.getConnection();
@@ -122,6 +150,16 @@ public class CompromissoDaoBanco implements CompromissoDao {
         return compromissos;
     }
 
+    /**
+     * Lista compromissos
+     * @param inicio A data de inicio do intervalo
+     * @param fim A data final do intervalo
+     * @param agenda A agenda que será listada os compromissos
+     * @return A lista de compromissos dentro do intervalo passado
+     * @throws ClassNotFoundException
+     * @throws IOException
+     * @throws SQLException 
+     */
     @Override
     public List<Compromisso> list(LocalDate inicio, LocalDate fim, String agenda) throws ClassNotFoundException, IOException, SQLException {
         Connection con = BancoConexao.getConnection();
@@ -161,6 +199,14 @@ public class CompromissoDaoBanco implements CompromissoDao {
         return compromissos;
     }
 
+    /**
+     * Cria compromissos
+     * @param comp O dados do compromisso que será criado
+     * @return A confirmação da criação do usuário
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public boolean create(Compromisso comp) throws IOException, ClassNotFoundException, SQLException {
         Connection con = BancoConexao.getConnection();
@@ -178,6 +224,14 @@ public class CompromissoDaoBanco implements CompromissoDao {
         return retorno;
     }
 
+    /**
+     * Deleta um usuário
+     * @param comp Os dados do compromisso que será deletado
+     * @return A confirmação de que o compromisso fo deletado
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public boolean delete(Compromisso comp) throws IOException, ClassNotFoundException, SQLException {
         Connection con = BancoConexao.getConnection();
@@ -195,6 +249,15 @@ public class CompromissoDaoBanco implements CompromissoDao {
         return retorno;
     }
 
+    /**
+     * Atualiza um compromisso
+     * @param compNovo Os novos dados do compromisso
+     * @param compAntigo Os antigos dados do compromisso
+     * @return A confirmação da atualização do compromisso
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public boolean update(Compromisso compNovo, Compromisso compAntigo) throws IOException, ClassNotFoundException, SQLException {
         Connection con = BancoConexao.getConnection();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ifpb.agendanota10.controle;
 
 import com.ifpb.agendanota10.entidade.Agenda;
@@ -19,12 +14,15 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author ricar
+ * Essa classe contém métodos referentes a construção da agenda no arquivo
+ * @author Ricarte
  */
 public class AgendaDaoBinario implements AgendaDao{
     private File agendas;
 
+    /**
+     * Construtor da AgendaDaoBinario
+     */
     public AgendaDaoBinario() {
         agendas = new File("Agendas.bin");
 
@@ -40,6 +38,14 @@ public class AgendaDaoBinario implements AgendaDao{
         }
     }
 
+    /**
+     * Lê uma agenda
+     * @param nome O nome da agenda
+     * @return Os dados da agenda
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public Agenda read(String nome) throws ClassNotFoundException, SQLException, IOException {
         List<Agenda> agendasUsers = list(userLogado.getEmail());
@@ -52,6 +58,14 @@ public class AgendaDaoBinario implements AgendaDao{
         return null;    
     }
 
+    /**
+     * Lista as agendas
+     * @param email O email do usuario
+     * @return Lista de agendas do usuário
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public List<Agenda> list(String email) throws ClassNotFoundException, SQLException, IOException {
         List<Agenda> agendasList = new ArrayList<>();
@@ -72,6 +86,14 @@ public class AgendaDaoBinario implements AgendaDao{
         }
     }
 
+    /**
+     * Cria uma agenda
+     * @param agenda Os dados da agenda que sera criada
+     * @return A confirmacao da criacao da agenda
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean create(Agenda agenda) throws ClassNotFoundException, SQLException, IOException {
         List<Agenda> agendasUsers = list(userLogado.getEmail());
@@ -89,6 +111,14 @@ public class AgendaDaoBinario implements AgendaDao{
         return true;
     }
 
+    /**
+     * Deleta uma agenda
+     * @param nome O nome da agenda que sera deletada
+     * @return A confirmacao de que a agenda foi deletada
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean delete(String nome) throws ClassNotFoundException, SQLException, IOException {
         List<Agenda> agendasUsers = list(userLogado.getEmail());
@@ -104,6 +134,15 @@ public class AgendaDaoBinario implements AgendaDao{
         return false;
     }
 
+    /**
+     * Atualiza uma agenda
+     * @param agendaNova Os novos dados da agenda
+     * @param agendaAntiga Os antigos dados da agenda
+     * @return A confirmacao da atualizacao da agenda
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean update(Agenda agendaNova, Agenda agendaAntiga) throws ClassNotFoundException, SQLException, IOException {
         List<Agenda> agendasUsers = list(userLogado.getEmail());
@@ -120,6 +159,11 @@ public class AgendaDaoBinario implements AgendaDao{
         return false;
     }
     
+    /**
+     * Atualiza o arquivo
+     * @param agendas Lista de agendas
+     * @throws IOException 
+     */
     private void atualizarArquivo(List<Agenda> agendas) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(
                 new FileOutputStream(this.agendas));

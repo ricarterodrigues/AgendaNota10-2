@@ -36,8 +36,8 @@ public class TelaEditarCompromisso extends javax.swing.JFrame {
     private static Compromisso oldComp = new Compromisso();
     
     public TelaEditarCompromisso(Compromisso comp) {
-        daoComp= new CompromissoDaoBanco();
-        daoAg = new AgendaDaoBanco();
+        daoComp= new CompromissoDaoBinario();
+        daoAg = new AgendaDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -88,8 +88,9 @@ public class TelaEditarCompromisso extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novo Compromisso");
+        setTitle("Editar Compromisso");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel1.setText("Data");

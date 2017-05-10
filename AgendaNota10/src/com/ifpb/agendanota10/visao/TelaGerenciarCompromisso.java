@@ -32,7 +32,7 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
     private static CompromissoDao dao;
 
     public TelaGerenciarCompromisso() {
-        dao = new CompromissoDaoBanco();
+        dao = new CompromissoDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon imagemTituloJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -110,7 +110,9 @@ public class TelaGerenciarCompromisso extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Compromissos");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 0));

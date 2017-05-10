@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ifpb.agendanota10.controle;
 
 import com.ifpb.agendanota10.banco.BancoConexao;
@@ -19,11 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author ricar
+ * Essa classe contém métodos referentes a construção do usuário no banco de dados
+ * @author Ricarte
  */
 public class UsuarioDaoBanco implements UsuarioDao{
-
+    
+    /**
+     * Lê um usuário
+     * @param email O email do login do usuário
+     * @return Os dados do usuário selecionado
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public Usuario read(String email) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -57,7 +60,14 @@ public class UsuarioDaoBanco implements UsuarioDao{
             return null;
         }    
     }
-
+    
+    /**
+     * Lista os usuários 
+     * @return Os usuários 
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public List<Usuario> list() throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -90,6 +100,14 @@ public class UsuarioDaoBanco implements UsuarioDao{
         return usuarios;
     }
 
+    /**
+     * Cria um usuário
+     * @param usuario O dados do usuário que será criado
+     * @return A confirmação da criação do usuário
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean create(Usuario usuario) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -108,6 +126,14 @@ public class UsuarioDaoBanco implements UsuarioDao{
         return retorna;
     }
 
+    /**
+     * Deleta um usuário
+     * @param email O email do login do usuário que será deletado
+     * @return A confirmação de que o usuário foi deletado
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean delete(String email) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();
@@ -120,7 +146,15 @@ public class UsuarioDaoBanco implements UsuarioDao{
         con.close();
         return retorno; 
     }
-
+    
+    /**
+     * Atualiza um usuário
+     * @param usuario O email do login do usuário que será atualizado
+     * @return A confirmação da atualização do usuário
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean update(Usuario usuario) throws ClassNotFoundException, SQLException, IOException {
         Connection con = BancoConexao.getConnection();

@@ -39,8 +39,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }
     
     public TelaInicial(Usuario usuario){
-        daoAg = new AgendaDaoBanco();
-        daoComp = new CompromissoDaoBanco();
+        daoAg = new AgendaDaoBinario();
+        daoComp = new CompromissoDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         this.userLogado = usuario;
         initComponents();
@@ -108,7 +108,9 @@ public class TelaInicial extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Página Principal");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
 
         jButton5.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jButton5.setText("Novo Compromisso");

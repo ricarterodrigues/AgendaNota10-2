@@ -26,7 +26,7 @@ public class TelaNovaAgenda extends javax.swing.JFrame {
     private AgendaDao dao;
     
     public TelaNovaAgenda() {
-        dao = new AgendaDaoBanco();
+        dao = new AgendaDaoBinario();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
         ImageIcon iconeJanela = new ImageIcon("C:\\Users\\ricar\\Documents\\NetBeansProjects\\AgendaNota10\\img\\icone.png");
@@ -48,7 +48,9 @@ public class TelaNovaAgenda extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Criar Agenda");
         setLocation(new java.awt.Point(400, 200));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel1.setText("Nome");

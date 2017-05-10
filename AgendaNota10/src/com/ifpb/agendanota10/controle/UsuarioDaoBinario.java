@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ifpb.agendanota10.controle;
 
 import com.ifpb.agendanota10.entidade.Usuario;
@@ -19,13 +14,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author ricar
+ * Essa classe contém métodos referentes a construção do usuário no arquivo
+ * @author Ricarte
  */
 public class UsuarioDaoBinario implements UsuarioDao {
 
     private File users;
 
+    /**
+     * Construtor do UsuarioDaoBinario
+     */
     public UsuarioDaoBinario() {
         users = new File("Users.bin");
 
@@ -41,6 +39,14 @@ public class UsuarioDaoBinario implements UsuarioDao {
         }
     }
 
+    /**
+     * Lê um usuário
+     * @param email O email do login do usuário
+     * @return Os dados do usuário selecionado
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public Usuario read(String email) throws ClassNotFoundException, SQLException, IOException {
         List<Usuario> usuarios = list();
@@ -53,6 +59,13 @@ public class UsuarioDaoBinario implements UsuarioDao {
         return null;
     }
 
+    /**
+     * Lista os usuários
+     * @return Os usuários
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public List<Usuario> list() throws ClassNotFoundException, SQLException, IOException {
         if (users.length() > 0) {
@@ -66,6 +79,14 @@ public class UsuarioDaoBinario implements UsuarioDao {
         }
     }
 
+    /**
+     * Cria um usuário
+     * @param usuario Os dados do usuário que será criado
+     * @return A confirmação da criação do usuário
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean create(Usuario usuario) throws ClassNotFoundException, SQLException, IOException {
         List<Usuario> usuarios = list();
@@ -83,6 +104,14 @@ public class UsuarioDaoBinario implements UsuarioDao {
         return true;
     }
 
+    /**
+     * Deleta um usuário
+     * @param email O email do login do usuário
+     * @return A confirmação de que o usuário foi deletado
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean delete(String email) throws ClassNotFoundException, SQLException, IOException {
         List<Usuario> usuarios = list();
@@ -97,7 +126,15 @@ public class UsuarioDaoBinario implements UsuarioDao {
         }
         return false;
     }
-
+    
+    /**
+     * Atualiza um usuário
+     * @param usuario O email do login do usuário que será atualizad
+     * @return A confirmação da atualização do usuário
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
     public boolean update(Usuario usuario) throws ClassNotFoundException, SQLException, IOException {
         List<Usuario> usuarios = list();
